@@ -25,10 +25,20 @@ class DownloadController extends ChangeNotifier {
   void startDownload() async {
     if (_status == DownloadStatus.downloading) return;
 
-    // TODO 1 – set status to downloading
+    // 1 – set status to downloading
+    _status = DownloadStatus.downloading;
+    _progress = 0.0;
+    notifyListeners();
 
-    // TODO 2 – Loop 10 times and increment the download progress
+    // 2 – Loop 10 times and increment the download progress
+    for (int i = 0; i < 10; i++) {
+      await Future.delayed(const Duration(milliseconds: 1000));
+      _progress += 0.1;
+      notifyListeners();
+    }
 
-    // TODO 3 – set status to downloaded
+    // 3 – set status to downloaded
+    _status = DownloadStatus.downloaded;
+    notifyListeners();
   }
 }
