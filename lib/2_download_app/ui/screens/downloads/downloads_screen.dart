@@ -3,7 +3,6 @@ import '../../providers/theme_color_provider.dart';
 import '../../theme/theme.dart';
 import 'widgets/download_controler.dart';
 
-
 class DownloadsScreen extends StatelessWidget {
   // Create the list of fake ressources
   final List<Ressource> ressources = [
@@ -23,24 +22,29 @@ class DownloadsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: currentThemeColor.backgroundColor,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: 16),
-          Text(
-            "Downloads",
-            style: AppTextStyles.heading.copyWith(
-              color: currentThemeColor.color,
-            ),
+    return ListenableBuilder(
+      listenable: themeColorProvider,
+      builder: (context, child) {
+        return Container(
+          color: themeColorProvider.current.backgroundColor,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: 16),
+              Text(
+                "Downloads",
+                style: AppTextStyles.heading.copyWith(
+                  color: themeColorProvider.current.color,
+                ),
+              ),
+
+              SizedBox(height: 50),
+
+              // TODO – Add the Download tiles
+            ],
           ),
-
-          SizedBox(height: 50),
-
-          // TODO - Add the Download tiles
-        ],
-      ),
+        );
+      },
     );
   }
 }
